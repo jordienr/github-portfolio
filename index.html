@@ -14,6 +14,11 @@
             height: 100px;
             border-radius: 50%;
         }
+        #issues {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -22,10 +27,13 @@
     <p id="bio">BIO</p>
     <p id="location">LOCATION</p>
 
+    <h2>Issues</h2>
+    <div id="issues"></div>
+
     <script>
         const PROFILE_URL = "https://api.github.com/users/jordienr"
 
-        const respuesta = fetch(PROFILE_URL).then(
+        fetch(PROFILE_URL).then(
             (response) => {
                 const data = response.json().then(
                     (json) => {
@@ -48,6 +56,30 @@
             bioEl.innerHTML = bio;
             avatarEl.src = avatar;
         }
+
+        // ISSUES
+
+        const REPO = "github-portfolio"
+        const USER = "jordienr"
+        const ISSUES_URL = `https://api.github.com/repos/${USER}/${REPO}/issues`
+
+        fetch(ISSUES_URL).then(res => {
+            res.json().then(data => {
+                hydrateIssues(data)
+            })
+        })
+
+        function hydrateIssues(json) {
+            const el = document.getElementById('issues')
+
+            json.forEach(issue => {
+                const issueEl = document.createElement('a')
+                issueEl.innerHTML = issue.title
+                issueEl.href = issue.number
+                el.appendChild(issueEl)
+            })
+        }
+
     </script>
 </body>
 </html>
