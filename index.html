@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img id="avatar" src="" alt="">
+    <h1 id="name">PATATA</h1>
+    <p id="bio">BIO</p>
+    <p id="location">LOCATION</p>
+
+    <script>
+        const URL = "https://api.github.com/users/jordienr"
+
+        // PROMISES
+        // ASYNC AWAIT
+        // FETCH API
+
+        const respuesta = fetch(URL).then(
+            (response) => {
+                const data = response.json().then(
+                    (json) => {
+                        // console.log(json)
+                        hydrateDOM(json)
+                    }
+                )
+            }
+        )
+
+        const UserProvider = {
+            getUser: () => {
+                return fetch(URL).then(
+                    (response) => {
+                        return response.json()
+                    }
+                )
+            },
+            deleteUser: () => {
+
+            },
+            users: []
+        }
+
+        function hydrateDOM(json) {
+            const name = json.name;
+            const location = json.location;
+            const bio = json.bio;
+            const avatar = json.avatar_url;
+
+            const nameEl = document.getElementById('name');
+            const locationEl = document.getElementById('location');
+            const bioEl = document.getElementById('bio');
+            const avatarEl = document.getElementById('avatar');
+
+            nameEl.innerHTML = name;
+            locationEl.innerHTML = location;
+            bioEl.innerHTML = bio;
+            avatarEl.src = avatar;
+            
+
+        }
+
+    </script>
+</body>
+</html>
