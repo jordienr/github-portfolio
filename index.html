@@ -45,10 +45,7 @@
         }
 
         function hydrateDOM(json) {
-            const name = json.name;
-            const location = json.location;
-            const bio = json.bio;
-            const avatar = json.avatar_url;
+            const { name, location, bio, avatar_url: avatar } = json;
 
             const nameEl = document.getElementById('name');
             const locationEl = document.getElementById('location');
