@@ -10,6 +10,7 @@
 
 ## v0.1.0 - 31.12.2022
 
+- Created a Github repository
 - Added a method to fetch Github user issues from the API
 - Added a page to display a Github issue by number (e.g. `/blog/1`)
 - Added a start script to the project to serve the project
